@@ -1,17 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
-import { PieComponent } from './pie/pie.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 
 @NgModule({
   declarations: [
     HeaderComponent,
-    PieComponent
+    FooterComponent
   ],
   imports: [
     CommonModule
-  ]
+  ],
+  exports: [HeaderComponent, FooterComponent]
 })
 export class LayoutModule { }
