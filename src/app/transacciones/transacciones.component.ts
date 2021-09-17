@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-transaccion',
-  templateUrl: './transaccion.component.html',
-  styleUrls: ['./transaccion.component.css'],
+  selector: 'app-transacciones',
+  templateUrl: './transacciones.component.html',
+  styleUrls: ['./transacciones.component.css']
 })
-export class TransaccionComponent {
+export class TransaccionesComponent {
+
   public transacciones = [
     {
       id: 'design_a_virus',
@@ -72,4 +73,5 @@ export class TransaccionComponent {
       return 'income';
     }
   }
+
 }

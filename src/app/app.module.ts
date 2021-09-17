@@ -5,20 +5,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LayoutModule } from './layout/layout.module';
 import { TitleComponent } from './title/title.component';
-import { TransaccionComponent } from './transaccion/transaccion.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    TitleComponent,
-    TransaccionComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    LayoutModule
-  ],
+  declarations: [AppComponent, TitleComponent, HomeComponent],
+  imports: [BrowserModule, AppRoutingModule, LayoutModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
