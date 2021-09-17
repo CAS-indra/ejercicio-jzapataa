@@ -6,7 +6,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./transaccion.component.css'],
 })
 export class TransaccionComponent {
-  public balance = 0;
   public transacciones = [
     {
       id: 'design_a_virus',
@@ -50,20 +49,27 @@ export class TransaccionComponent {
     },
   ];
 
+  public balance = this.balanceTotal();
+
   public balanceTotal(): number{
-    var _balanceTotal=0;
-    for(let transaccion of this.transacciones){
-      if(transaccion.kind=='income'){
-        console.log('ingreso');
-        console.log(this.balance);
-        this.balance = this.balance + transaccion.amount;
-      }
-      else if(transaccion.kind=='spent'){
-        console.log('gasto');
-        console.log(this.balance);
-        this.balance = this.balance - transaccion.amount;
+    let balanceTotal = 0;
+    for(var i=0; i < this.transacciones.length; i++){
+      if(this.transacciones[i].kind=='income'){
+        balanceTotal=balanceTotal+this.transacciones[i].amount;
+      }else if(this.transacciones[i].kind=='spent'){
+        balanceTotal=balanceTotal-this.transacciones[i].amount;
       }
     }
-    return this.balance;
+    return balanceTotal;
+  }
+
+  public color = this._color();
+
+  public _color(): string{
+    if(this.balance < 0){
+      return 'spent';
+    }else{
+      return 'income';
+    }
   }
 }
