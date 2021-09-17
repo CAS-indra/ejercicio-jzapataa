@@ -2,11 +2,9 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-title',
-  templateUrl: './title.component.html',
-  styleUrls: ['./title.component.css']
+  template: `<h1>{{ title }} funciona!</h1>`,
+  styleUrls: ['./title.component.css'],
 })
-export class TitleComponent{
-
-  public title = 'MINSAIT';
-
+export class TitleComponent {
+  public title = 'Ejercicio 1';
 }

@@ -1,0 +1,13 @@
+<h3>Hay un total de {{ transacciones.length }} transacciones</h3>
+<ul>
+  <li *ngFor="let transaccion of transacciones">
+    <div class="transaccion" [ngClass]="{ 'spent': transaccion.kind=='spent', 'income': transaccion.kind=='income'}">
+      <span>{{transaccion.name}}</span><br/>
+      <span>{{transaccion.description}}</span><br/>
+      <span>{{transaccion.amount}}</span><br/>
+      <span>{{transaccion.date | date: 'dd-MM-YYYY'}}</span><br/>
+    </div>
+  </li>
+</ul>
+
+<h3>El balance total es {{ balanceTotal() }}</h3>

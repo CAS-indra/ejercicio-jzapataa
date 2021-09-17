@@ -5,11 +5,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LayoutModule } from './layout/layout.module';
 import { TitleComponent } from './title/title.component';
+import { TransaccionComponent } from './transaccion/transaccion.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TitleComponent
+    TitleComponent,
+    TransaccionComponent
   ],
   imports: [
     BrowserModule,
