@@ -49,7 +49,11 @@ export class TransaccionService {
 
   constructor() {}
 
-  public getTransacciones(): any {
+  public getTransaccion(): any {
     return <any>this.transacciones;
+  }
+
+  public getTransacciones(): any[] {
+    return <any[]>this.transacciones;
   }
 }

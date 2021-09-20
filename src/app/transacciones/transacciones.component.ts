@@ -8,17 +8,14 @@ import { TransaccionService } from '../data/transaccion.service';
   styleUrls: ['./transacciones.component.css'],
 })
 export class TransaccionesComponent implements OnInit {
-  public transacctionId = '';
-  public transacction = { name: '', amount: 0 };
+  public transacciones: any = [];
 
   constructor(private route: ActivatedRoute, private transacctionService: TransaccionService) {}
 
   ngOnInit(): void {
-    this.transacctionId = this.route.snapshot.params['id'];
-    const transactions = this.transacctionService.getTransacciones();
-    this.transacction = transactions.find((t: { id: string }) => t.id === this.transacctionId);
+    this.transacciones = this.transacctionService.getTransacciones();
   }
-  /*
+
   public balance = this.balanceTotal();
 
   public balanceTotal(): number {
@@ -41,5 +38,5 @@ export class TransaccionesComponent implements OnInit {
     } else {
       return 'income';
     }
-  }*/
+  }
 }

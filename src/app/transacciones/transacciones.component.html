@@ -1,3 +1,19 @@
-<h3> Proyecto: {{ transacctionId }} </h3>
-<h2>{{ transacction.name }}</h2>
-<h4>{{ transacction.amount }} € </h4>
+<h3>Hay un total de {{ transacciones.length }} transacciones</h3>
+<ul>
+  <li *ngFor="let transaccion of transacciones">
+    <div class="transaccion"
+         [ngClass]="{ 'spent': transaccion.kind=='spent', 'income': transaccion.kind=='income'}">
+      <a routerLink={{transaccion.id}}>ID: {{transaccion.id}}</a><br />
+      <span>Nombre: {{transaccion.name}}</span><br />
+      <span>Descripción: {{transaccion.description}}</span><br />
+      <span>Importe: {{transaccion.amount}}</span><br />
+      <span>Fecha: {{transaccion.date | date: 'dd-MM-YYYY'}}</span><br />
+    </div>
+  </li>
+</ul>
+
+<h3 [class]='color'>El balance total es {{ balance }}</h3>
+
+<div class="boton">
+  <a routerLink='./new'>Añadir</a>
+</div>
