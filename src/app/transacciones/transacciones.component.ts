@@ -1,64 +1,33 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { TransaccionService } from '../data/transaccion.service';
 
 @Component({
   selector: 'app-transacciones',
   templateUrl: './transacciones.component.html',
-  styleUrls: ['./transacciones.component.css']
+  styleUrls: ['./transacciones.component.css'],
 })
-export class TransaccionesComponent {
+export class TransaccionesComponent implements OnInit {
+  public transacctionId = '';
+  public transacction = { name: '', amount: 0 };
 
-  public transacciones = [
-    {
-      id: 'design_a_virus',
-      name: 'Design a virus',
-      description: 'Design a modified version of a current virus',
-      kind: 'spent',
-      amount: 500,
-      date: new Date(2020, 0, 1),
-      projectId: 'rule_the_world',
-      ownerId: 'world_admin',
-    },
-    {
-      id: 'produce_the_virus',
-      name: 'produce the virus',
-      description: 'Clone the virus in a secret lab',
-      kind: 'spent',
-      amount: 1200,
-      date: new Date(2020, 1, 1),
-      projectId: 'rule_the_world',
-      ownerId: 'world_admin',
-    },
-    {
-      id: 'buy_fuel',
-      name: 'Buy fuel',
-      description: 'A lot of fuel ',
-      kind: 'spent',
-      amount: 900,
-      date: new Date(2024, 0, 1),
-      projectId: 'conquer_mars',
-      ownerId: 'world_admin',
-    },
-    {
-      id: 'sell_view_seats',
-      name: 'Sell view seats',
-      description: 'Seats to view launches ',
-      kind: 'income',
-      amount: 80,
-      date: new Date(2025, 0, 1),
-      projectId: 'conquer_mars',
-      ownerId: 'world_admin',
-    },
-  ];
+  constructor(private route: ActivatedRoute, private transacctionService: TransaccionService) {}
 
+  ngOnInit(): void {
+    this.transacctionId = this.route.snapshot.params['id'];
+    const transactions = this.transacctionService.getTransacciones();
+    this.transacction = transactions.find((t: { id: string }) => t.id === this.transacctionId);
+  }
+  /*
   public balance = this.balanceTotal();
 
-  public balanceTotal(): number{
+  public balanceTotal(): number {
     let balanceTotal = 0;
-    for(var i=0; i < this.transacciones.length; i++){
-      if(this.transacciones[i].kind=='income'){
-        balanceTotal=balanceTotal+this.transacciones[i].amount;
-      }else if(this.transacciones[i].kind=='spent'){
-        balanceTotal=balanceTotal-this.transacciones[i].amount;
+    for (var i = 0; i < this.transacciones.length; i++) {
+      if (this.transacciones[i].kind == 'income') {
+        balanceTotal = balanceTotal + this.transacciones[i].amount;
+      } else if (this.transacciones[i].kind == 'spent') {
+        balanceTotal = balanceTotal - this.transacciones[i].amount;
       }
     }
     return balanceTotal;
@@ -66,12 +35,11 @@ export class TransaccionesComponent {
 
   public color = this._color();
 
-  public _color(): string{
-    if(this.balance < 0){
+  public _color(): string {
+    if (this.balance < 0) {
       return 'spent';
-    }else{
+    } else {
       return 'income';
     }
-  }
-
+  }*/
 }
