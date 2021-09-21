@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { TransaccionService } from '../data/transaccion.service';
+import { Observable } from 'rxjs';
+import { Transaccion, TransaccionService } from '../data/transaccion.service';
 
 @Component({
   selector: 'app-transacciones',
@@ -8,12 +9,22 @@ import { TransaccionService } from '../data/transaccion.service';
   styleUrls: ['./transacciones.component.css'],
 })
 export class TransaccionesComponent implements OnInit {
-  public transacciones: any = [];
+  public transacciones?: Transaccion[];
+  public transacciones$: Observable<{ data: Transaccion[] }> = [];
 
   constructor(private route: ActivatedRoute, private transacctionService: TransaccionService) {}
 
   ngOnInit(): void {
-    this.transacciones = this.transacctionService.getTransacciones();
+    this.getTransacciones();
+  }
+
+  getTransacciones() {
+    const transacciones$: Observable<{ data: Transaccion[] }> =
+      this.transacctionService.getTransacciones$();
+    transacciones$.subscribe(
+      res => (this.transacciones = res.data),
+      err => console.log(err),
+    );
   }
 
   public balance = this.balanceTotal();

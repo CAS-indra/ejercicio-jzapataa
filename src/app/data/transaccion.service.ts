@@ -1,10 +1,26 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
+export type Transaccion = {
+  id: string;
+  name: string;
+  description: string;
+  kind: string;
+  amount: number;
+  /* date: new Date(),*/
+  projectId: string;
+  ownerId: string;
+};
 
 @Injectable({
   providedIn: 'root',
 })
 export class TransaccionService {
-  private transacciones = [
+  private url = 'https://proton-angular-builders.herokuapp.com/v1/projects';
+
+  /*private transacciones = [
     {
       id: 'design_a_virus',
       name: 'Design a virus',
@@ -45,15 +61,22 @@ export class TransaccionService {
       projectId: 'conquer_mars',
       ownerId: 'world_admin',
     },
-  ];
+  ];*/
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
-  public getTransaccion(): any {
+  /*public getTransaccion(): any {
     return <any>this.transacciones;
   }
 
   public getTransacciones(): any[] {
     return <any[]>this.transacciones;
+  }*/
+
+  public getTransacciones$(): Observable<{ data: Transaccion[] }> {
+    return this.http.get<{ data: Transaccion[] }>(this.url);
+  }
+  public getTransaccionById$(id: string): Observable<Transaccion> {
+    return this.http.get<Transaccion>(this.url + id).pipe(map(res => res));
   }
 }
